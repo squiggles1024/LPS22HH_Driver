@@ -1,0 +1,7 @@
+../Drivers/CMSIS/Include/core_cm33.h:2127:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../Drivers/CMSIS/Include/core_cm33.h:2165:22:__NVIC_DisableIRQ	16	static,ignoring_inline_asm
+../Core/Src/LPS22HH_Hardware.c:36:13:LPS22HH_Init	8	static
+../Core/Src/LPS22HH_Hardware.c:43:13:LPS22HH_DeInit	8	static
+../Core/Src/LPS22HH_Hardware.c:49:25:LPS22HH_WriteReg	32	static
+../Core/Src/LPS22HH_Hardware.c:58:25:LPS22HH_ReadReg	32	static
+../Core/Src/LPS22HH_Hardware.c:67:16:LPS22HH_ioctl	24	static
