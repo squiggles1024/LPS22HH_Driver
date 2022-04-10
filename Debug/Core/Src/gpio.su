@@ -1,1 +1,2 @@
 ../Core/Src/gpio.c:40:6:MX_GPIO_Init	48	static
+../Core/Src/gpio.c:64:6:LPS22HH_GPIO_Init	40	static
