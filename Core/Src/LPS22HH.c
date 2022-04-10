@@ -158,6 +158,7 @@ LPS22HH_DataReadyFlag_t LPS22HH_ReadPressure(LPS22HH_Handle_t *Dev){
 	uint8_t buffer[3];
 	if(Dev->LPS22HH_IO.ReadReg(LPS22HH_REG_STATUS, &status,1) == LPS22HH_Ok){
 		if((status & 0x01) == 0x01){ // new data is available
+			Dev->DataReadyFlag = LPS22HH_DataReady;
 			Dev->LPS22HH_IO.ReadReg(LPS22HH_REG_PRESSURE_OUT_XL, buffer,3);
 			Dev->DataReadyFlag = LPS22HH_DataNotReady;
 			Dev->Pressure = ConvertPressure(buffer) / 4096.0; //Convert to hPA (1 atm = 1013 hPa)

@@ -49,10 +49,10 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = LPS22HH_Int_Pin;
+  GPIO_InitStruct.Pin = LPS22HH_IRQ_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(LPS22HH_Int_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(LPS22HH_IRQ_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
@@ -61,5 +61,20 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 2 */
+void LPS22HH_GPIO_Init(void){
+		GPIO_InitTypeDef GPIO_InitStruct = {0};
 
+	  __HAL_RCC_GPIOH_CLK_ENABLE();
+	  __HAL_RCC_GPIOG_CLK_ENABLE();
+
+	  /*Configure GPIO pin : PtPin */
+	  GPIO_InitStruct.Pin = LPS22HH_IRQ_Pin;
+	  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+	  GPIO_InitStruct.Pull = GPIO_NOPULL;
+	  HAL_GPIO_Init(LPS22HH_IRQ_GPIO_Port, &GPIO_InitStruct);
+
+	  /* EXTI interrupt init*/
+	  HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
+	  HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+}
 /* USER CODE END 2 */

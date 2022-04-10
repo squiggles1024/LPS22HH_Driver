@@ -57,17 +57,17 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LPS22HH_SCL_Pin GPIO_PIN_4
-#define LPS22HH_SCL_GPIO_Port GPIOH
-#define LPS22HH_SDA_Pin GPIO_PIN_5
-#define LPS22HH_SDA_GPIO_Port GPIOH
+#define MEMS_I2C_SCL_Pin GPIO_PIN_4
+#define MEMS_I2C_SCL_GPIO_Port GPIOH
+#define MEMS_I2C_SDA_Pin GPIO_PIN_5
+#define MEMS_I2C_SDA_GPIO_Port GPIOH
 #define DEBUG_UART_RX_Pin GPIO_PIN_10
 #define DEBUG_UART_RX_GPIO_Port GPIOA
 #define DEBUG_UART_TX_Pin GPIO_PIN_9
 #define DEBUG_UART_TX_GPIO_Port GPIOA
-#define LPS22HH_Int_Pin GPIO_PIN_2
-#define LPS22HH_Int_GPIO_Port GPIOG
-#define LPS22HH_Int_EXTI_IRQn EXTI2_IRQn
+#define LPS22HH_IRQ_Pin GPIO_PIN_2
+#define LPS22HH_IRQ_GPIO_Port GPIOG
+#define LPS22HH_IRQ_EXTI_IRQn EXTI2_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

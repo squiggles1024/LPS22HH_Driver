@@ -35,20 +35,20 @@ static uint8_t LPS22HH_ioctl(LPS22HH_Cmd_t command);
 /*Initializes low level IO*/
 static void LPS22HH_Init(){
 	HAL_Delay(5); //Device takes 4.5 ms to boot.
-	MX_GPIO_Init();
+	LPS22HH_GPIO_Init();
 	MX_I2C2_Init();
 }
 
 /*DeInitializes low level IO.*/
 static void LPS22HH_DeInit(){
 	//Do Not De-Init I2C Peripheral as other devices may be using it.
-	HAL_GPIO_DeInit(LPS22HH_Int_GPIO_Port, LPS22HH_Int_Pin);
+	HAL_GPIO_DeInit(LPS22HH_IRQ_GPIO_Port, LPS22HH_IRQ_Pin);
 }
 
 /*Sends data to register over I2C2 Bus*/
 static LPS22HH_Status_t LPS22HH_WriteReg(uint8_t reg, uint8_t *pdata, uint8_t length){
 	if(HAL_I2C_Mem_Write(&hi2c2, LPS22HH_DEVICE_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, pdata , length, 5000) != HAL_OK){
-		_log(log_i2c,"Write Reg address %x failed.",reg);
+		_log(log_i2c,"Write to LPS22HH Reg address %x failed.",reg);
 		return LPS22HH_Error;
 	}
 	return LPS22HH_Ok;
@@ -57,7 +57,7 @@ static LPS22HH_Status_t LPS22HH_WriteReg(uint8_t reg, uint8_t *pdata, uint8_t le
 /*Reads data from register over I2C2 Bus*/
 static LPS22HH_Status_t LPS22HH_ReadReg(uint8_t reg, uint8_t *pdata, uint8_t length){
 	if(HAL_I2C_Mem_Read(&hi2c2, LPS22HH_DEVICE_ADDRESS, reg, I2C_MEMADD_SIZE_8BIT, pdata , length, 5000) != HAL_OK){
-		_log(log_i2c,"Read Reg address %x failed.", reg);
+		_log(log_i2c,"Read from LPS22HH Reg address %x failed.", reg);
 		return LPS22HH_Error;
 	}
 	return LPS22HH_Ok;
@@ -69,17 +69,17 @@ static uint8_t LPS22HH_ioctl(LPS22HH_Cmd_t command){
 	switch(command){
 
 	case LPS22HH_IRQEnable:
-		NVIC_EnableIRQ(LPS22HH_Int_EXTI_IRQn);
+		NVIC_EnableIRQ(LPS22HH_IRQ_EXTI_IRQn);
 		return LPS22HH_Ok;
 		break;
 
 	case LPS22HH_IRQDisable:
-		NVIC_DisableIRQ(LPS22HH_Int_EXTI_IRQn);
+		NVIC_DisableIRQ(LPS22HH_IRQ_EXTI_IRQn);
 		return LPS22HH_Ok;
 		break;
 
 	case LPS22HH_ReadIntPin:
-		PinStatus = HAL_GPIO_ReadPin(LPS22HH_Int_GPIO_Port, LPS22HH_Int_Pin);
+		PinStatus = HAL_GPIO_ReadPin(LPS22HH_IRQ_GPIO_Port, LPS22HH_IRQ_Pin);
 		if(PinStatus == GPIO_PIN_SET){
 			return 1;
 		} else {
